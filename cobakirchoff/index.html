@@ -1,17 +1,29 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js" integrity="sha512-6SHRAV8GhJ+3WvGPKQNsBpLj7J9QF9JFwH7nPSRLtH/OqFrlXRd54Z+QDgw7xj1f7dV8c50sKhZYr/xGPlMoiw==" crossorigin="anonymous"></script>
 <script>
 //panggil fungsi update text
 
-function reset(){
+function hilang(){
 updateText("tspan58-3", " ");
 updateText("tspan58-3-4-7", " ");
 updateText("tspan58-3-4", " ");
 updateText("tspan186-1", " ");
 updateText("tspan186-1-1", " ");
 updateText("tspan186-1-1-3", " ");
+
+//Hilangin panah
+updateText("tspan2086", " ");
+updateText("tspan2086-8", " ");
+updateText("tspan2086-8-5", " ");
+
+//Hilangin Nilai arus 
+updateText("tspan58-3-1", " ");
+updateText("tspan58-3-1-4", " ");
+updateText("tspan58-3-1-4-8", " ");
+
+
 
 
 
@@ -26,8 +38,14 @@ var varv2 = document.getElementById("v2").value;
 var varv3 = document.getElementById("v3").value;
 
 
+const m = [[-var1, var2,0 ],[0,var2,var3 ],[1,1,-1]];
+const x = math.lusolve(m,[varv1-varv2, varv3-varv2,0]);
 
+const vari1 = math.subset(x, math.index(0,0)) ;
+const vari2 = math.subset(x, math.index(1,0)) ;
+const vari3 = math.subset(x, math.index(2,0)) ;
 
+document.getElementById("hasil").innerHTML="I<sub>1</sub> = "+math.abs(vari1).toFixed(1)+"A , I<sub>2</sub> = "+math.abs(vari2).toFixed(1)+"A , I<sub>3</sub> = " +math.abs(vari3).toFixed(1)+"A";
 
 updateText("tspan58-3", "="+var1+"Ω"); //R diganti 
 updateText("tspan58-3-4-7", "="+var2+"Ω");
@@ -35,6 +53,26 @@ updateText("tspan58-3-4","="+var3+"Ω");
 updateText("tspan186-1", "="+varv1+"V"); //R diganti 
 updateText("tspan186-1-1", "="+varv2+"V");
 updateText("tspan186-1-1-3","="+varv3+"V");
+
+//memastikan panah 
+if(vari1 < 0){
+updateText("tspan2086", "←");}
+else{
+updateText("tspan2086", "→");}
+
+if(vari2 < 0){
+updateText("tspan2086-8", "←");}
+else{
+updateText("tspan2086-8", "→");}
+
+if(vari3 < 0){
+updateText("tspan2086-8-5", "←");}
+else{
+updateText("tspan2086-8-5", "→");}
+
+updateText("tspan58-3-1", "="+math.abs(vari1).toFixed(1)+"A");
+updateText("tspan58-3-1-4", "="+math.abs(vari2).toFixed(1)+"A");
+updateText("tspan58-3-1-4-8", "="+math.abs(vari3).toFixed(1)+"A");
 
 }
 function updateText(tspanId, txt) {
@@ -52,7 +90,7 @@ function updateTextWithJQuery(tspanId, txt) {
 </script>
 </head>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<body onload="reset()">
+<body onload="hilang()">
 R1 = <input type="text" id="r1" placeholder=" &#937 ", maxlength="4" size="4">  V1 = <input type="text" id="v1" placeholder="volt" maxlength="4" size="4"> 
 <br>
 R2 = <input type="text" id="r2"  placeholder=" &#937 " maxlength="4" size="4"> V2 = <input type="text" id="v2" placeholder="volt" maxlength="4" size="4">  
@@ -60,9 +98,7 @@ R2 = <input type="text" id="r2"  placeholder=" &#937 " maxlength="4" size="4"> V
 R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V3 = <input type="text" id="v3" placeholder="volt" maxlength="4" size="4">  
 <br>
 <input type="button" onclick="calculate()" value="hitung"> <br>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -92,9 +128,9 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
      inkscape:window-height="747"
      id="namedview136"
      showgrid="false"
-     inkscape:zoom="3.0661754"
-     inkscape:cx="101.78997"
-     inkscape:cy="79.992241"
+     inkscape:zoom="2"
+     inkscape:cx="151.96367"
+     inkscape:cy="49.565449"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -378,44 +414,44 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
   <g
      id="g134"
      transform="matrix(0.34135211,0,0,-0.34135211,-7.6232365,35.263903)"
-     style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+     style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
     <g
        transform="translate(129.782,37.537)"
        id="g136"
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
       <g
          id="g138"
-         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
         <g
            transform="translate(-259.993,-637.016)"
            id="g140"
-           style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+           style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
           <text
              id="text144"
-             style="font-variant:normal;font-size:9.2653px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+             style="font-variant:normal;font-size:9.2653px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
              transform="matrix(1,0,0,-1,259.993,637.016)"><tspan
                id="tspan142"
                y="0"
                x="0"
-               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">V</tspan></text>
+               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">V</tspan></text>
           <text
              id="text148"
-             style="font-variant:normal;font-size:7.0415px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+             style="font-variant:normal;font-size:7.0415px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
              transform="matrix(1,0,0,-1,266.021,635.522)"><tspan
                id="tspan146"
                y="0"
                x="0"
-               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">3</tspan></text>
+               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">3</tspan></text>
           <g
              transform="translate(259.993,637.016)"
              id="g150"
-             style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1" />
+             style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff" />
         </g>
       </g>
       <g
          transform="translate(-129.782,-37.537)"
          id="g152"
-         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1" />
+         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff" />
     </g>
   </g>
   <path
@@ -466,20 +502,20 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
      y="23.711197"
      x="1.0005379"
      id="text188"
-     style="font-variant:normal;font-size:3.16273px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"><tspan
+     style="font-variant:normal;font-size:3.16273px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"><tspan
        id="tspan186"
        y="23.711197"
        x="1.0005379"
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">V</tspan></text>
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff;">V</tspan></text>
   <text
      y="24.221176"
      x="3.0578671"
      id="text192"
-     style="font-variant:normal;font-size:2.40363px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"><tspan
+     style="font-variant:normal;font-size:2.40363px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"><tspan
        id="tspan190"
        y="24.221176"
        x="3.0578671"
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">1</tspan></text>
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff;">1</tspan></text>
   <g
      transform="matrix(0.34135211,0,0,-0.34135211,1.0005379,23.711196)"
      id="g194"
@@ -497,26 +533,26 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
   <g
      id="g202"
      transform="matrix(0.34135211,0,0,-0.34135211,4.8227867,32.744422)"
-     style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none">
+     style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none;fill:#0000ff">
     <path
        id="path204"
-       style="fill:none;stroke:#000000;stroke-width:0.82677742;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.85714293;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#0000ff;stroke:#000000;stroke-width:0.82677742;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.85714293;stroke-dasharray:none;stroke-opacity:1"
        d="M 59.52802,8.65846 V 6.0945 m 0,5.08967 v 2.56397" />
     <path
        id="path206"
-       style="fill:none;stroke:#000000;stroke-width:0.82677742;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.85714293;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#0000ff;stroke:#000000;stroke-width:0.82677742;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.85714293;stroke-dasharray:none;stroke-opacity:1"
        d="m 55.7012,8.65846 h 7.65364 m -11.48048,2.52571 h 15.30733" />
     <g
        transform="matrix(0,-1,-1,0,59.527,9.921)"
        id="g208"
-       style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none">
+       style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none;fill:#0000ff">
       <g
          id="g210"
-         style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none" />
+         style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none;fill:#0000ff" />
       <g
          transform="translate(-59.527,-9.921)"
          id="g212"
-         style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none" />
+         style="stroke:#000000;stroke-opacity:1;stroke-width:0.82677742;stroke-miterlimit:4.85714293;stroke-dasharray:none;fill:#0000ff" />
     </g>
   </g>
   <g
@@ -531,44 +567,44 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
   <g
      id="g220"
      transform="matrix(0.34135211,0,0,-0.34135211,14.228505,32.830713)"
-     style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+     style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
     <g
        transform="translate(38.366,7.772)"
        id="g222"
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
       <g
          id="g224"
-         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
         <g
            transform="translate(-168.577,-607.251)"
            id="g226"
-           style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">
+           style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">
           <text
              id="text230"
-             style="font-variant:normal;font-size:9.2653px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+             style="font-variant:normal;font-size:9.2653px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
              transform="matrix(1,0,0,-1,168.577,607.251)"><tspan
                id="tspan228"
                y="0"
                x="0"
-               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">V</tspan></text>
+               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">V</tspan></text>
           <text
              id="text234"
-             style="font-variant:normal;font-size:7.0415px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+             style="font-variant:normal;font-size:7.0415px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
              transform="matrix(1,0,0,-1,174.605,605.756)"><tspan
                id="tspan232"
                y="0"
                x="0"
-               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">2</tspan></text>
+               style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff">2</tspan></text>
           <g
              transform="translate(168.577,607.251)"
              id="g236"
-             style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1" />
+             style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff" />
         </g>
       </g>
       <g
          transform="translate(-38.366,-7.772)"
          id="g238"
-         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1" />
+         style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff" />
     </g>
   </g>
   <g
@@ -660,11 +696,11 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
        y="3.2877002"
        id="tspan58-3">=11</tspan></text>
   <text
-     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"
      id="text188-9"
      x="5.8170133"
      y="23.874306"><tspan
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff;"
        x="5.8170133"
        y="23.874306"
        id="tspan186-1">=1</tspan></text>
@@ -672,17 +708,17 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
      y="30.237326"
      x="31.627167"
      id="text188-9-7"
-     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"><tspan
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"><tspan
        id="tspan186-1-1"
        y="30.237326"
        x="31.627167"
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">=2</tspan></text>
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff;">=2</tspan></text>
   <text
-     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"
      id="text188-9-7-4"
      x="40.394878"
      y="22.836378"><tspan
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#0000ff;"
        x="40.394878"
        y="22.836378"
        id="tspan186-1-1-3">=3</tspan></text>
@@ -749,24 +785,32 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
        y="10.630304"
        x="27.327742"
        style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#ff0000;">2</tspan></text>
-  <text
-     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"
-     id="text60-9-4-0"
-     x="46.020611"
-     y="11.759513"><tspan
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#ff0000;"
-       x="46.020611"
-       y="11.759513"
-       id="tspan58-31-2-7">I</tspan></text>
-  <text
-     style="font-variant:normal;font-size:2.40363px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;"
-     id="text64-5-0-8"
-     x="47.407722"
-     y="12.269835"><tspan
-       style="stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1;fill:#ff0000;"
-       x="47.407722"
-       y="12.269835"
-       id="tspan62-5-4-4">3</tspan></text>
+  <g
+     transform="translate(0.06614583,0.33072916)"
+     id="g2844">
+    <g
+       id="g2837"
+       transform="translate(-0.52916666)">
+      <text
+         style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+         id="text60-9-4-0"
+         x="37.024769"
+         y="15.463676"><tspan
+           style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+           x="37.024769"
+           y="15.463676"
+           id="tspan58-31-2-7">I</tspan></text>
+      <text
+         style="font-variant:normal;font-size:2.40363px;font-family:Century;-inkscape-font-specification:CenturySchL-Roma;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+         id="text64-5-0-8"
+         x="38.41188"
+         y="15.974"><tspan
+           style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+           x="38.41188"
+           y="15.974"
+           id="tspan62-5-4-4">3</tspan></text>
+    </g>
+  </g>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -817,15 +861,88 @@ R3 = <input type="text" id="r3"  placeholder=" &#937 " maxlength="4" size="4"> V
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:4.9389px;line-height:1.25;font-family:sans-serif;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
      x="-12.564291"
-     y="-43.107994"
+     y="-42.924942"
      id="text2088-0-3"
      transform="matrix(0,-1,-1,0,0,0)"><tspan
        sodipodi:role="line"
        id="tspan2086-8-5"
        x="-12.564291"
-       y="-43.107994"
+       y="-42.924942"
        style="font-size:4.9389px;fill:#ff0000;stroke-width:0.264583">→</tspan></text>
+  <text
+     y="12.029926"
+     x="8.1278334"
+     id="text60-7-04"
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"><tspan
+       id="tspan58-3-1"
+       y="12.029926"
+       x="8.1278334"
+       style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">=i1</tspan></text>
+  <text
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+     id="text60-7-04-2"
+     x="29.404083"
+     y="10.560852"><tspan
+       style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"
+       x="29.404083"
+       y="10.560852"
+       id="tspan58-3-1-4">=i2</tspan></text>
+  <text
+     y="16.256058"
+     x="39.466156"
+     id="text60-7-04-2-9"
+     style="font-variant:normal;font-size:3.16272px;font-family:Century;-inkscape-font-specification:CenturySchL-Ital;writing-mode:lr-tb;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1"><tspan
+       id="tspan58-3-1-4-8"
+       y="16.256058"
+       x="39.466156"
+       style="fill:#ff0000;stroke:#000000;stroke-width:0;stroke-miterlimit:4.85714;stroke-dasharray:none;stroke-opacity:1">=i3</tspan></text>
+  <g
+     style="font-style:normal;font-weight:normal;font-size:1.59177px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0397944"
+     id="text2848"
+     aria-label="arifstwan">
+    <path
+       id="path2850"
+       style="stroke-width:0.0397944"
+       d="m 36.067734,34.796516 h -0.145342 v -0.09249 q -0.01943,0.01321 -0.05285,0.03731 -0.03264,0.02332 -0.06373,0.03731 -0.03653,0.01788 -0.08394,0.02953 -0.04741,0.01244 -0.111144,0.01244 -0.117362,0 -0.198971,-0.07772 -0.08161,-0.07772 -0.08161,-0.198194 0,-0.09871 0.04197,-0.159332 0.04275,-0.0614 0.121248,-0.09638 0.07928,-0.03497 0.190422,-0.04741 0.111144,-0.01244 0.23861,-0.01865 v -0.02254 q 0,-0.04974 -0.01788,-0.08239 -0.0171,-0.03264 -0.04974,-0.0513 -0.03109,-0.01788 -0.07461,-0.02409 -0.04352,-0.0062 -0.09094,-0.0062 -0.05752,0 -0.128244,0.01555 -0.07073,0.01477 -0.146119,0.04352 h -0.0078 v -0.148452 q 0.04275,-0.01166 0.123579,-0.02565 0.08083,-0.01399 0.159333,-0.01399 0.09171,0 0.159332,0.01554 0.0684,0.01477 0.118139,0.0513 0.04897,0.03575 0.07461,0.09249 0.02565,0.05674 0.02565,0.140679 z m -0.145342,-0.213738 v -0.241719 q -0.06684,0.0039 -0.157778,0.01166 -0.09016,0.0078 -0.143011,0.02254 -0.06296,0.01788 -0.101817,0.05596 -0.03886,0.03731 -0.03886,0.103371 0,0.07462 0.04508,0.112699 0.04508,0.03731 0.13757,0.03731 0.07695,0 0.140679,-0.02954 0.06373,-0.03031 0.118139,-0.07228 z" />
+    <path
+       id="path2852"
+       style="stroke-width:0.0397944"
+       d="m 36.892377,34.087681 h -0.0078 q -0.03264,-0.0078 -0.06373,-0.01088 -0.03031,-0.0039 -0.07228,-0.0039 -0.06762,0 -0.130575,0.03031 -0.06296,0.02954 -0.121248,0.07695 v 0.616344 h -0.146119 v -0.868167 h 0.146119 v 0.128243 q 0.08705,-0.06995 0.153115,-0.09871 0.06684,-0.02954 0.136015,-0.02954 0.03808,0 0.05518,0.0023 0.0171,0.0016 0.0513,0.007 z" />
+    <path
+       id="path2854"
+       style="stroke-width:0.0397944"
+       d="m 37.188502,33.783007 h -0.164773 v -0.151561 h 0.164773 z m -0.0093,1.013509 h -0.146119 v -0.868167 h 0.146119 z" />
+    <path
+       id="path2856"
+       style="stroke-width:0.0397944"
+       d="m 37.936976,33.7286 h -0.0078 q -0.02409,-0.007 -0.06296,-0.01399 -0.03886,-0.0078 -0.0684,-0.0078 -0.09405,0 -0.136792,0.04197 -0.04197,0.04119 -0.04197,0.150006 v 0.02953 h 0.263482 v 0.122802 h -0.258818 v 0.745365 h -0.14612 v -0.745365 h -0.09871 v -0.122802 h 0.09871 v -0.02876 q 0,-0.154669 0.07695,-0.237055 0.07695,-0.08316 0.222288,-0.08316 0.04897,0 0.08783,0.0047 0.03964,0.0047 0.07228,0.01088 z" />
+    <path
+       id="path2858"
+       style="stroke-width:0.0397944"
+       d="m 38.649697,34.546248 q 0,0.118916 -0.09871,0.195085 -0.09793,0.07617 -0.268145,0.07617 -0.09638,0 -0.177209,-0.02254 -0.08006,-0.02332 -0.134461,-0.05052 v -0.163996 h 0.0078 q 0.06917,0.05207 0.153891,0.08316 0.08472,0.03031 0.162442,0.03031 0.09638,0 0.150783,-0.03109 0.05441,-0.03109 0.05441,-0.09793 0,-0.0513 -0.02954,-0.07772 -0.02954,-0.02643 -0.113476,-0.04508 -0.03109,-0.007 -0.08161,-0.01632 -0.04974,-0.0093 -0.09094,-0.02021 -0.114253,-0.03031 -0.162441,-0.0886 -0.04741,-0.05907 -0.04741,-0.144565 0,-0.05363 0.02176,-0.101041 0.02254,-0.04741 0.06762,-0.08472 0.04353,-0.03653 0.110367,-0.05752 0.06762,-0.02176 0.150783,-0.02176 0.07772,0 0.157001,0.01943 0.08005,0.01865 0.132906,0.04586 v 0.156224 h -0.0078 q -0.05596,-0.04119 -0.136016,-0.06917 -0.08006,-0.02876 -0.157,-0.02876 -0.08006,0 -0.135239,0.03109 -0.05518,0.03031 -0.05518,0.09094 0,0.05363 0.03342,0.08083 0.03264,0.0272 0.105703,0.0443 0.04042,0.0093 0.09016,0.01865 0.05052,0.0093 0.08394,0.0171 0.101817,0.02332 0.157001,0.08006 0.05518,0.05751 0.05518,0.152337 z" />
+    <path
+       id="path2860"
+       style="stroke-width:0.0397944"
+       d="m 39.310344,34.788744 q -0.04119,0.01088 -0.09016,0.01788 -0.04819,0.007 -0.08627,0.007 -0.132906,0 -0.20208,-0.07151 -0.06917,-0.0715 -0.06917,-0.229283 v -0.461676 h -0.09871 v -0.122802 h 0.09871 v -0.249491 h 0.146119 v 0.249491 h 0.301566 v 0.122802 h -0.301566 v 0.395611 q 0,0.0684 0.0031,0.107258 0.0031,0.03808 0.02176,0.07151 0.0171,0.03109 0.04663,0.04586 0.03031,0.01399 0.09171,0.01399 0.03575,0 0.07461,-0.0101 0.03886,-0.01088 0.05596,-0.01788 h 0.0078 z" />
+    <path
+       id="path2862"
+       style="stroke-width:0.0397944"
+       d="m 40.579563,33.928349 -0.226175,0.868167 H 40.21815 l -0.223065,-0.669196 -0.221511,0.669196 h -0.134461 l -0.228506,-0.868167 h 0.152337 l 0.159333,0.672305 0.216847,-0.672305 h 0.120471 l 0.222288,0.672305 0.150783,-0.672305 z" />
+    <path
+       id="path2864"
+       style="stroke-width:0.0397944"
+       d="m 41.449285,34.796516 h -0.145342 v -0.09249 q -0.01943,0.01321 -0.05285,0.03731 -0.03264,0.02332 -0.06373,0.03731 -0.03653,0.01788 -0.08394,0.02953 -0.04741,0.01244 -0.111144,0.01244 -0.117362,0 -0.198971,-0.07772 -0.08161,-0.07772 -0.08161,-0.198194 0,-0.09871 0.04197,-0.159332 0.04275,-0.0614 0.121248,-0.09638 0.07928,-0.03497 0.190422,-0.04741 0.111144,-0.01244 0.23861,-0.01865 v -0.02254 q 0,-0.04974 -0.01788,-0.08239 -0.0171,-0.03264 -0.04974,-0.0513 -0.03109,-0.01788 -0.07462,-0.02409 -0.04353,-0.0062 -0.09094,-0.0062 -0.05752,0 -0.128243,0.01555 -0.07073,0.01477 -0.146119,0.04352 h -0.0078 v -0.148452 q 0.04275,-0.01166 0.12358,-0.02565 0.08083,-0.01399 0.159333,-0.01399 0.09171,0 0.159332,0.01554 0.0684,0.01477 0.118139,0.0513 0.04897,0.03575 0.07461,0.09249 0.02565,0.05674 0.02565,0.140679 z m -0.145342,-0.213738 v -0.241719 q -0.06684,0.0039 -0.157778,0.01166 -0.09016,0.0078 -0.143011,0.02254 -0.06296,0.01788 -0.101817,0.05596 -0.03886,0.03731 -0.03886,0.103371 0,0.07462 0.04508,0.112699 0.04508,0.03731 0.13757,0.03731 0.07695,0 0.140679,-0.02954 0.06373,-0.03031 0.118139,-0.07228 z" />
+    <path
+       id="path2866"
+       style="stroke-width:0.0397944"
+       d="m 42.458131,34.796516 h -0.146119 v -0.494319 q 0,-0.05985 -0.007,-0.111921 -0.007,-0.05285 -0.02565,-0.08239 -0.01943,-0.03264 -0.05596,-0.04819 -0.03653,-0.01632 -0.09482,-0.01632 -0.05985,0 -0.125134,0.02953 -0.06529,0.02954 -0.125134,0.07539 v 0.648211 h -0.14612 v -0.868167 h 0.14612 v 0.09638 q 0.0684,-0.05674 0.141456,-0.08861 0.07306,-0.03187 0.150006,-0.03187 0.140678,0 0.214515,0.08472 0.07384,0.08472 0.07384,0.244051 z" />
+  </g>
 </svg>
+
+
+
+<p id="hasil"> </p>
+
 
 
 
