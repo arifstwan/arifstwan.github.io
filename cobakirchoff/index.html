@@ -1,7 +1,18 @@
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js" integrity="sha512-6SHRAV8GhJ+3WvGPKQNsBpLj7J9QF9JFwH7nPSRLtH/OqFrlXRd54Z+QDgw7xj1f7dV8c50sKhZYr/xGPlMoiw==" crossorigin="anonymous"></script>
+<style>
+#petunjuk {
+  width: 7.5cm;
+  padding: 5px 0;
+
+  background-color: #FDFEFE;
+  margin-top: 2px;
+  display : none;
+}
+</style>
 <script>
 //panggil fungsi update text
 
@@ -84,11 +95,31 @@ function updateText(tspanId, txt) {
 function updateTextWithJQuery(tspanId, txt) {
 	$("#"+tspanId).text(txt);
 }
-
+function myFunction() {
+  var x = document.getElementById("petunjuk");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 </script>
 </head>
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <body onload="hilang()">
+<h4> Kalkulator Kirchoff / Dua loop</h4>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="myFunction()" value="petunjuk"> <br>
+<div id="petunjuk" style="text-align:left">
+<ol>
+<li> Jika tidak ada R atau V, isi dengan 0
+</li>
+<li> Jika R lebih dari 1 di tiap cabang, jumlah terlebih dahulu
+</li>
+<li> V kebalikan (invert) dari gambar di bawah, isikan nilai negatif (-)
+</li>
+</ol>
+
+</div> <br>
 R1 = <input type="text" id="r1" placeholder=" &#937 ", maxlength="4" size="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V1 = <input type="text" id="v1" placeholder="volt" maxlength="4" size="4"> 
 <br>
 R2 = <input type="text" id="r2"  placeholder=" &#937 " maxlength="4" size="4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V2 = <input type="text" id="v2" placeholder="volt" maxlength="4" size="4">  
