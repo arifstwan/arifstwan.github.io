@@ -11,12 +11,104 @@
   background-color: #FDFEFE;
   margin-top: 2px;
   display : none;
+  
+  
 }
+ol { padding-left: 1em; }
 </style>
-function hilang(){updateText("tspan58-3"," "),updateText("tspan58-3-4-7"," "),updateText("tspan58-3-4"," "),updateText("tspan186-1"," "),updateText("tspan186-1-1"," "),updateText("tspan186-1-1-3"," "),updateText("tspan2086"," "),updateText("tspan2086-8"," "),updateText("tspan2086-8-5"," "),updateText("tspan58-3-1"," "),updateText("tspan58-3-1-4"," "),updateText("tspan58-3-1-4-8"," ")}function calculate(){var t=document.getElementById("r1").value,e=document.getElementById("r2").value,a=document.getElementById("r3").value,n=document.getElementById("v1").value,d=document.getElementById("v2").value,u=document.getElementById("v3").value;const p=[[-t,e,0],[0,e,a],[1,1,-1]],s=math.lusolve(p,[n-d,u-d,0]),x=math.subset(s,math.index(0,0)),m=math.subset(s,math.index(1,0)),l=math.subset(s,math.index(2,0));document.getElementById("hasil").innerHTML="I<sub>1</sub> = "+math.abs(x).toFixed(1)+"A , I<sub>2</sub> = "+math.abs(m).toFixed(1)+"A , I<sub>3</sub> = "+math.abs(l).toFixed(1)+"A",updateText("tspan58-3","="+t+"Ω"),updateText("tspan58-3-4-7","="+e+"Ω"),updateText("tspan58-3-4","="+a+"Ω"),updateText("tspan186-1","="+n+"V"),updateText("tspan186-1-1","="+d+"V"),updateText("tspan186-1-1-3","="+u+"V"),updateText("tspan2086",x<0?"←":"→"),updateText("tspan2086-8",m<0?"←":"→"),updateText("tspan2086-8-5",l<0?"←":"→"),updateText("tspan58-3-1","="+math.abs(x).toFixed(1)+"A"),updateText("tspan58-3-1-4","="+math.abs(m).toFixed(1)+"A"),updateText("tspan58-3-1-4-8","="+math.abs(l).toFixed(1)+"A")}function updateText(t,e){for(var a=document.getElementById(t);a.firstChild;)a.removeChild(a.firstChild);a.appendChild(document.createTextNode(e))}function updateTextWithJQuery(t,e){$("#"+t).text(e)}function myFunction(){var t=document.getElementById("petunjuk");"block"===t.style.display?t.style.display="none":t.style.display="block"}
+<script>
+//panggil fungsi update text
+
+function hilang(){
+
+
+updateText("tspan58-3", " ");
+updateText("tspan58-3-4-7", " ");
+updateText("tspan58-3-4", " ");
+updateText("tspan186-1", " ");
+updateText("tspan186-1-1", " ");
+updateText("tspan186-1-1-3", " ");
+
+//Hilangin panah
+updateText("tspan2086", " ");
+updateText("tspan2086-8", " ");
+updateText("tspan2086-8-5", " ");
+
+//Hilangin Nilai arus 
+updateText("tspan58-3-1", " ");
+updateText("tspan58-3-1-4", " ");
+updateText("tspan58-3-1-4-8", " ");
+
+
+}
+function calculate(){
+var var1 = document.getElementById("r1").value;
+var var2 = document.getElementById("r2").value;
+var var3 = document.getElementById("r3").value;
+var varv1 = document.getElementById("v1").value;
+var varv2 = document.getElementById("v2").value;
+var varv3 = document.getElementById("v3").value;
+
+
+const m = [[-var1, var2,0 ],[0,var2,var3 ],[1,1,-1]];
+const x = math.lusolve(m,[varv1-varv2, varv3-varv2,0]);
+
+const vari1 = math.subset(x, math.index(0,0)) ;
+const vari2 = math.subset(x, math.index(1,0)) ;
+const vari3 = math.subset(x, math.index(2,0)) ;
+
+document.getElementById("hasil").innerHTML="I<sub>1</sub> = "+math.abs(vari1).toFixed(1)+"A , I<sub>2</sub> = "+math.abs(vari2).toFixed(1)+"A , I<sub>3</sub> = " +math.abs(vari3).toFixed(1)+"A";
+
+updateText("tspan58-3", "="+var1+"Ω"); //R diganti 
+updateText("tspan58-3-4-7", "="+var2+"Ω");
+updateText("tspan58-3-4","="+var3+"Ω");
+updateText("tspan186-1", "="+varv1+"V"); //R diganti 
+updateText("tspan186-1-1", "="+varv2+"V");
+updateText("tspan186-1-1-3","="+varv3+"V");
+
+//memastikan panah 
+if(vari1 < 0){
+updateText("tspan2086", "←");}
+else{
+updateText("tspan2086", "→");}
+
+if(vari2 < 0){
+updateText("tspan2086-8", "←");}
+else{
+updateText("tspan2086-8", "→");}
+
+if(vari3 < 0){
+updateText("tspan2086-8-5", "←");}
+else{
+updateText("tspan2086-8-5", "→");}
+
+updateText("tspan58-3-1", "="+math.abs(vari1).toFixed(1)+"A");
+updateText("tspan58-3-1-4", "="+math.abs(vari2).toFixed(1)+"A");
+updateText("tspan58-3-1-4-8", "="+math.abs(vari3).toFixed(1)+"A");
+
+}
+function updateText(tspanId, txt) {
+  var spanR = document.getElementById(tspanId);
+	while( spanR.firstChild ) {
+    spanR.removeChild( spanR.firstChild );
+  }
+  spanR.appendChild( document.createTextNode(txt) );
+}
+
+function updateTextWithJQuery(tspanId, txt) {
+	$("#"+tspanId).text(txt);
+}
+function myFunction() {
+  var x = document.getElementById("petunjuk");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 </script>
 </head>
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
 <body onload="hilang()">
 <h4> Kalkulator Kirchoff / Dua loop</h4>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="myFunction()" value="petunjuk"> <br>
