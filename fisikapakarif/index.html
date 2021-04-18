@@ -7,6 +7,7 @@
 #more {display: none;}
 #morelist {display: none;}
 #tugasbtn {display: none;}
+#tugasbtn2 {display: none;}
 #moreyt {display: none;}
 .wrapper {
   max-width: 680px;
@@ -306,15 +307,15 @@ display: block;
         </div>
       </div></span>
       <button id="tugasbtn"> <a href="https://sites.google.com/site/arifstwanfisika/home/Tugas%202%20Usaha%20Energi.pdf?attredirects=0&d=1"  style="text-decoration: none;">Tugas 2 usaha Energi </a></button>
-    <button id="tugasbtn"> <a href="https://sites.google.com/site/arifstwanfisika/home/FISIKA%20X_Usaha-Energi_15%20April.pdf?attredirects=0&d=1"  style="text-decoration: none;"> Materi 15 April PPT </a></button>
+    <button id="tugasbtn2"> <a href="https://sites.google.com/site/arifstwanfisika/home/FISIKA%20X_Usaha-Energi_15%20April.pdf?attredirects=0&d=1"  style="text-decoration: none;"> Materi 15 April PPT </a></button>
 	    
 	    
 	    
     </p>
     <button onclick="klikMore()" id="myBtn">Read more</button>
     <h4> Kamis 8 April </h4>
-	  <a href="https://youtu.be/5FaXxXO_GLE"> Video Pembahasan Ulang </a>
-	  <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhcmlmc3R3YW5ncnxneDoyNzU3ZDMzNzBlMTYwYWNh"> Link Download PPT Materi </a>
+	  <a class="wa" href="https://youtu.be/5FaXxXO_GLE"> Video Pembahasan Ulang </a> <br>
+	  <a class="wa"  href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhcmlmc3R3YW5ncnxneDoyNzU3ZDMzNzBlMTYwYWNh"> Link Download PPT Materi </a>
   </div>
   
   <div class="col-3 col-s-12">
@@ -375,6 +376,7 @@ function klikMore() {
   var moreYoutube = document.getElementById("moreyt");
   var btnText = document.getElementById("myBtn");
   var btnTugas = document.getElementById("tugasbtn");
+  var btnTugas2 = document.getElementById("tugasbtn2");
 
   if (dots.style.display === "none") {
     dots.style.display = "inline";
@@ -383,6 +385,7 @@ function klikMore() {
     moreList.style.display="none";
     moreYoutube.style.display="none";
     btnTugas.style.display="none";
+	  btnTugas2.style.display="none";
   } else {
     dots.style.display = "none";
     btnText.innerHTML = "Read less"; 
@@ -390,6 +393,7 @@ function klikMore() {
     moreList.style.display="block";
     moreYoutube.style.display="inline";
     btnTugas.style.display="inline";
+	   btnTugas2.style.display="inline";
   }
 }
 </script>
