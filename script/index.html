@@ -72,8 +72,8 @@
 function func(){
 const alink = document.getElementById("inlinkdoc").value;
 var linkdoc= alink.replace("/view?usp=sharing","");
-//var linkdoc= alink.replace("/view?usp=drivesdk","");
-	/view?usp=sharing/preview
+var linkdoc= alink.replace("/view?usp=drivesdk","");
+
 var iddoc = linkdoc.replace("https://drive.google.com/file/d/","");
 const doc = document.getElementById("indoc").value;
 const info = document.getElementById("indoc").value;
