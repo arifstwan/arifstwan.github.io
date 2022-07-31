@@ -76,7 +76,13 @@ var linkdoc = alink.split("/view?usp=");
 
 var iddoc = linkdoc[0].replace("https://drive.google.com/file/d/","");
 const doc = document.getElementById("indoc").value;
-const info = document.getElementById("indoc").value;
+var info;
+if(document.getElementById("ininfo").value==""){
+info = document.getElementById("indoc").value;
+}
+else{
+ info = document.getElementById("ininfo").value;
+};
 var mysnippet = "<div class='clear'><table class='akademi_table'><thead><tbody><tr class='top_tab td_col'><td scope='col' style='width: 45px; text-align: center; vertical-align: middle;'><Strong>NO</strong></td>	<td class='top_tab td_col' scope='col' style='width: 45%; text-align: center; vertical-align: middle;'><strong>DOKUMEN</strong></td><td class='top_tab td_col' scope='col' style='text-align: center; vertical-align: middle;'><strong>KETERANGAN</strong></td></tr></thead><tr><td class='tdrow' style='text-align: center;'>1</td><td class='tdcol'> <a href ='https://drive.google.com/uc?export=download&id="+iddoc+"' rel='noopener'><strong>"+doc+"</strong> <i class='fa fa-download'></i></a> </td><td style='text-align: left; vertical-align: top;'>"+info+"</td></tr></tbody></table></div><br>";
 
 var mysnippet2 = "<iframe src='"+linkdoc[0]+"/preview' width='100%' height='500px'> </iframe> <br>";
